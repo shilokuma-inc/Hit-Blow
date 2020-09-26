@@ -44,8 +44,6 @@ class ViewController: UIViewController {
                 }
             }
         }
-//        print(allArray)
-//        print(allArray[1295])
         
         var firstArray: [Int] = []
         
@@ -55,18 +53,16 @@ class ViewController: UIViewController {
             }
         }
         
-//        print(firstArray)
-        
         for hit in 0...4{
             for blow in 0...4{
                 createhitBlowArray(hit: hit, blow: blow)
             }
         }
+        
         print(hitBlowArray)
-        let a = hitBlowArray[0][0].count + hitBlowArray[0][1].count + hitBlowArray[0][2].count + hitBlowArray[0][3].count + hitBlowArray[0][4].count + hitBlowArray[1][0].count + hitBlowArray[1][1].count + hitBlowArray[1][2].count
-        print(a + hitBlowArray[1][3].count + hitBlowArray[2][0].count + hitBlowArray[2][1].count + hitBlowArray[2][2].count + hitBlowArray[3][0].count + hitBlowArray[4][0].count)
-        
-        
+        allArray = hitBlowArray[0][0]
+        print(allArray)
+        hitBlowArray = [[[],[],[],[],[]],[[],[],[],[],[]],[[],[],[],[],[]],[[],[],[],[],[]],[[],[],[],[],[]]]  
     }
     
     
