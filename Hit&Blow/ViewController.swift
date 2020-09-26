@@ -13,7 +13,10 @@ class ViewController: UIViewController {
     let randomInt2 = Int.random(in: 1..<7)
     let randomInt3 = Int.random(in: 1..<7)
     let randomInt4 = Int.random(in: 1..<7)
+    var randomInt = 0
     @IBOutlet weak var randomLabel: UILabel!
+    
+    var allArray: [Int] = []
     
     var hitBlowArray: [[[Int]]] = [[[],[],[],[],[]],[[],[],[],[],[]],[[],[],[],[],[]],[[],[],[],[],[]],[[],[],[],[],[]]]
     let firstResult: [Int] = [20]
@@ -28,12 +31,10 @@ class ViewController: UIViewController {
 //        黄色 = 4
 //        ピンク = 5
 //        白 = 6
-        
-        let randomInt = 1000*randomInt1 + 100 * randomInt2 + 10 * randomInt3 + randomInt4
+        randomInt = 1000*randomInt1 + 100 * randomInt2 + 10 * randomInt3 + randomInt4
         randomLabel.text = String(randomInt)
         print(randomInt)
         
-        var allArray: [Int] = []
         for s in 1..<7 {
             for h in 1..<7 {
                 for t in 1..<7 {
@@ -56,19 +57,112 @@ class ViewController: UIViewController {
         
 //        print(firstArray)
         
-        createhitBlowArray(hit: 0, blow: 0)
-        createhitBlowArray(hit: 0, blow: 1)
-        createhitBlowArray(hit: 4, blow: 4)
-        print(hitBlowArray[4][3])
+        for hit in 0...4{
+            for blow in 0...4{
+                createhitBlowArray(hit: hit, blow: blow)
+            }
+        }
+        print(hitBlowArray)
+        let a = hitBlowArray[0][0].count + hitBlowArray[0][1].count + hitBlowArray[0][2].count + hitBlowArray[0][3].count + hitBlowArray[0][4].count + hitBlowArray[1][0].count + hitBlowArray[1][1].count + hitBlowArray[1][2].count
+        print(a + hitBlowArray[1][3].count + hitBlowArray[2][0].count + hitBlowArray[2][1].count + hitBlowArray[2][2].count + hitBlowArray[3][0].count + hitBlowArray[4][0].count)
         
         
     }
     
     
     func createhitBlowArray(hit: Int, blow: Int){
-        hitBlowArray[hit][blow].append(1111)
-        hitBlowArray[hit][blow].append(1112)
-        hitBlowArray[hit][blow].append(1113)
+        if(hit == 0){
+            for hikaku in allArray {
+                if(hikaku/1000 != randomInt/1000){
+                    if(hikaku/100%10 != randomInt/100%10){
+                        if(hikaku/10%10 != randomInt/10%10){
+                            if(hikaku%10 != randomInt%10){
+                                if(blow == 0){ // once
+                                    hitBlowArray[hit][countHitColor(hikaku: hikaku)].append(hikaku)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }else if(hit == 1){
+            for hikaku in allArray {
+                if(((hikaku/1000 == randomInt/1000) && (hikaku/100%10 != randomInt/100%10) && (hikaku/10%10 != randomInt/10%10) && (hikaku%10 != randomInt%10)) || ((hikaku/1000 != randomInt/1000) && (hikaku/100%10 == randomInt/100%10) && (hikaku/10%10 != randomInt/10%10) && (hikaku%10 != randomInt%10)) || ((hikaku/1000 != randomInt/1000) && (hikaku/100%10 != randomInt/100%10) && (hikaku/10%10 == randomInt/10%10) && (hikaku%10 != randomInt%10)) || ((hikaku/1000 != randomInt/1000) && (hikaku/100%10 != randomInt/100%10) && (hikaku/10%10 != randomInt/10%10) && (hikaku%10 == randomInt%10))){
+                    if(blow == 0){ // once
+                        hitBlowArray[hit][countHitColor(hikaku: hikaku)-1].append(hikaku)
+                    }
+                }
+            }
+        }else if(hit == 2){
+            for hikaku in allArray {
+                if(((hikaku/1000 == randomInt/1000) && (hikaku/100%10 == randomInt/100%10) && (hikaku/10%10 != randomInt/10%10) && (hikaku%10 != randomInt%10)) || ((hikaku/1000 == randomInt/1000) && (hikaku/100%10 != randomInt/100%10) && (hikaku/10%10 == randomInt/10%10) && (hikaku%10 != randomInt%10)) || ((hikaku/1000 == randomInt/1000) && (hikaku/100%10 != randomInt/100%10) && (hikaku/10%10 != randomInt/10%10) && (hikaku%10 == randomInt%10)) || ((hikaku/1000 != randomInt/1000) && (hikaku/100%10 == randomInt/100%10) && (hikaku/10%10 == randomInt/10%10) && (hikaku%10 != randomInt%10)) || ((hikaku/1000 != randomInt/1000) && (hikaku/100%10 == randomInt/100%10) && (hikaku/10%10 != randomInt/10%10) && (hikaku%10 == randomInt%10)) || ((hikaku/1000 != randomInt/1000) && (hikaku/100%10 != randomInt/100%10) && (hikaku/10%10 == randomInt/10%10) && (hikaku%10 == randomInt%10))){
+                    if(blow == 0){ // once
+                        hitBlowArray[hit][countHitColor(hikaku: hikaku)-2].append(hikaku)
+                    }
+                }
+            }
+        }else if(hit == 3){
+            for hikaku in allArray {
+                if(((hikaku/1000 != randomInt/1000) && (hikaku/100%10 == randomInt/100%10) && (hikaku/10%10 == randomInt/10%10) && (hikaku%10 == randomInt%10)) || ((hikaku/1000 == randomInt/1000) && (hikaku/100%10 != randomInt/100%10) && (hikaku/10%10 == randomInt/10%10) && (hikaku%10 == randomInt%10)) || ((hikaku/1000 == randomInt/1000) && (hikaku/100%10 == randomInt/100%10) && (hikaku/10%10 != randomInt/10%10) && (hikaku%10 == randomInt%10)) || ((hikaku/1000 == randomInt/1000) && (hikaku/100%10 == randomInt/100%10) && (hikaku/10%10 == randomInt/10%10) && (hikaku%10 != randomInt%10))){
+                    if(blow == 0){ // once
+                        hitBlowArray[hit][countHitColor(hikaku: hikaku)-3].append(hikaku)
+                    }
+                }
+            }
+        }else{
+            for hikaku in allArray {
+                if(hikaku/1000 == randomInt/1000){
+                    if(hikaku/100%10 == randomInt/100%10){
+                        if(hikaku/10%10 == randomInt/10%10){
+                            if(hikaku%10 == randomInt%10){
+                                if(blow == 0){ // once
+                                    hitBlowArray[hit][0].append(hikaku)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    func countHitColor(hikaku: Int) -> Int{
+        var count = 0
+        for searchColor in 1...6{
+            var randomCount = 0
+            if(searchColor == randomInt/1000){
+                randomCount += 1
+            }
+            if(searchColor == randomInt/100%10){
+                randomCount += 1
+            }
+            if(searchColor == randomInt/10%10){
+                randomCount += 1
+            }
+            if(searchColor == randomInt%10){
+                randomCount += 1
+            }
+            var hikakuCount = 0
+            if(searchColor == hikaku/1000){
+                hikakuCount += 1
+            }
+            if(searchColor == hikaku/100%10){
+                hikakuCount += 1
+            }
+            if(searchColor == hikaku/10%10){
+                hikakuCount += 1
+            }
+            if(searchColor == hikaku%10){
+                hikakuCount += 1
+            }
+            if(randomCount <= hikakuCount){
+                count += randomCount
+            }else{
+                count += hikakuCount
+            }
+        }
+        return count
     }
     
 
